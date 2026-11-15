@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { company, isActiveRoute, navigation } from '@/lib/site-content';
+import { isActiveRoute, navigation, talk } from '@/lib/site-content';
 import { Arrow } from './arrow';
 
 function Menu({ pathname }: { pathname: string }) {
@@ -21,7 +21,7 @@ function Menu({ pathname }: { pathname: string }) {
           if (!event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) setOpen(false);
         }}><span className="mono">0{index + 1}</span>{link.label}<Arrow diagonal /></Link>)}
       </nav>
-      <Link className="button button-red" href={company.contact} onClick={() => setOpen(false)}>Talk with us <Arrow diagonal /></Link>
+      <Link className="button button-red" href={talk.href} aria-current={isActiveRoute(pathname, talk.href) ? 'page' : undefined} onClick={() => setOpen(false)}>{talk.label} <Arrow diagonal /></Link>
     </SheetContent>
   </Sheet>;
 }

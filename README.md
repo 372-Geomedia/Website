@@ -1,8 +1,8 @@
 # 372 GeoMedia
 
-The local site includes the homepage and all five navigation pages: Capabilities, Work, About, Insights, and Contact. Work and Insights each have three individual detail pages. The supplied `../logo.png` is preserved and copied into `public/logo.png`.
+The site has a homepage and four navigation pages: Capabilities, Work, About, and Talk with us. Work has three individual detail pages. The supplied `../logo.png` is preserved and copied into `public/logo.png`.
 
-The latest page-completion work is **local only**, as requested. It has not been pushed, packaged or deployed to the shared preview.
+Insights and the separate Contact page were removed. Contact became Talk with us at `/talk`; nginx redirects `/contact` there.
 
 ## Architecture
 
@@ -63,7 +63,7 @@ The map uses real OpenStreetMap geometry for Galveston Bay. `lib/geography/proxi
 
 ## Navigation and content
 
-All company navigation now stays within the local site. The hero's What we do link still reaches the homepage capability section. The header and footer link to the dedicated pages, and the current navigation item remains highlighted on nested detail routes.
+All company navigation stays within the local site. The hero's What we do link still reaches the homepage capability section. The navigation is Capabilities, Work, About, and Talk with us; Talk with us renders as the outlined header button (red button in the mobile menu) and is highlighted like the other items when current. `lib/site-content.ts` holds `navigation` and `talk`. The current navigation item remains highlighted on nested detail routes.
 
 | Route | Content |
 | --- | --- |
@@ -71,18 +71,16 @@ All company navigation now stays within the local site. The hero's What we do li
 | `/capabilities` | Six service groups and a connected-information diagram with a feedback loop |
 | `/work` | Three clearly labeled illustrative workflows |
 | `/work/[slug]` | Challenge, sources, approach, operational outputs, and feedback for each workflow |
-| `/about` | Company perspective, combined experience, working principles, and the 372 name story |
-| `/insights` | Three original editorial perspectives |
-| `/insights/[slug]` | Full article, section navigation, primary-source references, and related reading |
-| `/contact` | Published company email and a prefilled email-draft link |
+| `/about` | Company perspective, the 372 name story, working principles, and combined experience |
+| `/talk` | Talk with us: published company email, a prefilled email-draft link, and three starting prompts |
 
-`lib/work.ts` and `lib/insights.ts` hold the detail records. Dynamic pages use async parameters, `generateStaticParams`, `dynamicParams = false`, and `notFound()` for unknown slugs. `app/not-found.tsx` provides a recovery page. Each route has its own title and description; no publication dates or authors are fabricated.
+`lib/work.ts` holds the detail records. Dynamic pages use async parameters, `generateStaticParams`, `dynamicParams = false`, and `notFound()` for unknown slugs. `app/not-found.tsx` provides a recovery page. Each route has its own title and description; no publication dates or authors are fabricated.
 
 The original site's Projects page did not provide usable project records. Work therefore displays **illustrative workflows**, with explicit labels on both the index and detail pages. These are not claimed client engagements, testimonials, or measured results. Replace them with approved project material when available.
 
-Insights copy is newly drafted for review. Technical references are linked beside the relevant sections: W3C/OGC spatial-data guidance, OGC API Features, W3C PROV, and National Hurricane Center material. The About page links to Mount Vernon's Culper Code Book transcript for the 372 = map origin.
+The About page links to Mount Vernon's Culper Code Book transcript for the 372 = map origin.
 
-Contact uses the previously published `support@372geomedia.com`. Its draft link opens the visitor's email app with project prompts; the page does not submit messages or claim successful delivery. No contact API, credentials, phone number, or address has been invented.
+Talk with us uses the previously published `support@372geomedia.com`. Its draft link opens the visitor's email app with project prompts; the page does not submit messages or claim successful delivery. No contact API, credentials, phone number, or address has been invented.
 
 Confirmed experience wording: **50+ years of combined team experience.** The company owner confirmed that the original site's 50+ years claim refers to the team's combined experience. This wording is displayed in the experience section; the figure does not represent the company's age or years working in GeoAI. Specific project outcomes, team biographies, and credentials still need their own supporting details.
 
@@ -104,6 +102,6 @@ Assets needed for those increments: approved case-study details and results; pro
 
 Semantic landmarks, a skip link, one H1 per page, visible focus, contrast-conscious text, reduced motion, and a focus-managed mobile menu. The menu closes on ordinary link activation and resets on route changes, including Back/Forward. Content and navigation are readable without animation. Grids stack at narrower breakpoints; diagrams use readable single-column states on small screens. No carousel, auto-playing media, or data-entry form is included.
 
-Build, TypeScript, and lint checks validate authored code. `npm run check:routes` performs local HTTP integration checks across all 12 reachable pages: status, unique metadata, shared landmarks, active navigation, fragment destinations, local links, the email-draft URL, and three genuine 404 responses. It rejects non-local origins. These are not browser interaction or visual tests.
+Build, TypeScript, and lint checks validate authored code. `npm run check:routes` performs local HTTP integration checks across all 8 reachable pages: status, unique metadata, shared landmarks, active navigation, fragment destinations, local links, the email-draft URL, and three genuine 404 responses (including the removed `/insights`). The `/contact` redirect lives in nginx, so check it against the production container. It rejects non-local origins. These are not browser interaction or visual tests.
 
 The unmodified generated UI catalog and its unused mobile hook are excluded from lint because the starter ships with lint errors in those files; they remain covered by TypeScript. Browser interaction and device visual QA remain outstanding. The previously shared preview at https://geomedia-372.jasonjordan00.chatgpt.site remains on its earlier published version and is accessible to anyone with the link.

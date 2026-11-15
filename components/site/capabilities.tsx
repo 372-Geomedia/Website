@@ -1,5 +1,5 @@
 import { capabilities } from '@/lib/capabilities';
-import { company } from '@/lib/site-content';
+import { talk } from '@/lib/site-content';
 import { Arrow } from './arrow';
 import { CapabilityMotif } from './capability-motif';
 import Link from 'next/link';
@@ -34,7 +34,7 @@ export function Capabilities({ compact = false }: { compact?: boolean }) {
         </div>
         <div className="capabilities-close">
           <p>Have a challenge that crosses these disciplines?<br /><span>That’s where geography brings it together.</span></p>
-          <Link className="text-link" href={company.contact}>Talk through your project <Arrow diagonal /></Link>
+          <Link className="text-link" href={talk.href}>Talk through your project <Arrow diagonal /></Link>
         </div>
       </div>
     </section>

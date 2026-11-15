@@ -15,7 +15,7 @@ export const capabilities: Capability[] = [
     kind: 'response',
     field: 'Response & recovery',
     title: 'Emergency Management',
-    description: 'Bring incident, asset and field information into a shared operational picture.',
+    description: 'Track missions, assets and field teams in one operational picture—from the first report through recovery.',
     applications: [
       'Situational awareness & mission tracking',
       'Blue Roof, debris & temporary power operations',
@@ -26,7 +26,7 @@ export const capabilities: Capability[] = [
     kind: 'platforms',
     field: 'Shared environments',
     title: 'Geospatial Platforms',
-    description: 'Build a dependable place for spatial data, applications and the people who use them.',
+    description: 'Stand up, assess and improve the GIS your organization depends on, whether on premises or in the cloud.',
     applications: [
       'Enterprise & cloud GIS',
       'Collaborative maps, dashboards & forms',
@@ -37,7 +37,7 @@ export const capabilities: Capability[] = [
     kind: 'analysis',
     field: 'Patterns & possibilities',
     title: 'Spatial Analysis & GeoAI',
-    description: 'Combine geography, imagery and analytical models to understand patterns and assess options.',
+    description: 'Use geography, imagery and AI-assisted models to find patterns, assess hazards and compare locations.',
     applications: [
       'Hazard, vulnerability & imagery analysis',
       'Property analysis & commercial site selection',
@@ -48,7 +48,7 @@ export const capabilities: Capability[] = [
     kind: 'software',
     field: 'Purpose-built tools',
     title: 'Custom Software',
-    description: 'Create applications around the decisions and workflows that matter to your operation.',
+    description: 'Build applications around the way your teams actually work, instead of reshaping the work to fit the tool.',
     applications: [
       'Web, desktop & field applications',
       'Assignments, status tracking & reporting',
@@ -59,7 +59,7 @@ export const capabilities: Capability[] = [
     kind: 'integration',
     field: 'Information in motion',
     title: 'Data Engineering & Integration',
-    description: 'Connect separate systems and keep information useful as it moves between them.',
+    description: 'Connect the systems you already have so location data moves between them cleanly—and can be traced.',
     applications: [
       'ETL, APIs & spatial databases',
       'Sensors, field data & real-time feeds',
@@ -70,7 +70,7 @@ export const capabilities: Capability[] = [
     kind: 'planning',
     field: 'People & place',
     title: 'Community & Planning',
-    description: 'Make local information understandable for the people shaping a community’s future.',
+    description: 'Turn parcels, zoning and local data into maps that residents and decision-makers can use.',
     applications: [
       'StoryMaps & public engagement tools',
       'Zoning, parcels & infrastructure insights',

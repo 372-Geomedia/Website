@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 // development or production server: npm run check:routes -- http://localhost:3001
 const base = new URL(process.argv[2] || 'http://localhost:3000');
 assert(['localhost', '127.0.0.1', '[::1]'].includes(base.hostname), 'Use a local server for these checks.');
-const queue = ['/', '/capabilities', '/work', '/about', '/insights', '/contact'];
+const queue = ['/', '/capabilities', '/work', '/about', '/talk'];
 const pages = new Map();
 const titles = new Set();
 const descriptionValues = new Set();
@@ -48,9 +48,9 @@ while (queue.length) {
   if (path === '/') assert(!currentLink, 'Homepage: no unrelated active tab');
   else assert.equal(attribute(currentLink || '', 'href'), `/${path.split('/')[1]}`, `${path}: correct active navigation`);
 
-  if (path === '/contact') {
+  if (path === '/talk') {
     const draftHref = links.find(href => href.startsWith('mailto:') && href.includes('?'));
-    assert(draftHref, 'Contact: email draft link exists');
+    assert(draftHref, 'Talk with us: email draft link exists');
     const draft = new URL(draftHref);
     assert.equal(draft.pathname, 'support@372geomedia.com');
     assert(draft.searchParams.get('subject')?.includes('372 GeoMedia'));
@@ -59,8 +59,9 @@ while (queue.length) {
   pages.set(path, html);
 }
 
-assert.equal(pages.size, 12, 'All six index/home pages and six detail pages should be reachable.');
-for (const path of ['/work/does-not-exist', '/insights/does-not-exist', '/does-not-exist']) {
+assert.equal(pages.size, 8, 'The home page, four section pages and three work pages should be reachable.');
+// /insights was removed; /contact is redirected to /talk by nginx, not the dev server.
+for (const path of ['/work/does-not-exist', '/insights', '/does-not-exist']) {
   const response = await fetch(new URL(path, base));
   assert.equal(response.status, 404, `${path}: return an actual 404 status`);
   assert((await response.text()).includes('back on course'), `${path}: branded recovery content`);
