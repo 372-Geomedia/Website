@@ -6,14 +6,15 @@ import './globals.css';
 
 const sans = Sora({ variable: '--font-sora', subsets: ['latin'], display: 'swap' });
 const mono = IBM_Plex_Mono({ variable: '--font-plex-mono', subsets: ['latin'], weight: ['400', '500'], display: 'swap' });
+const siteDescription = '372 GeoMedia builds maps, GIS platforms and field applications for emergency response, environmental monitoring and community planning.';
 
 export const metadata: Metadata = {
   title: '372 GeoMedia — See the Whole Picture',
-  description: '372 GeoMedia connects data, geography, technology and people to turn complex information into operational understanding.',
+  description: siteDescription,
   metadataBase: new URL('https://geomedia-372.jasonjordan00.chatgpt.site'),
   openGraph: {
     title: '372 GeoMedia — See the Whole Picture',
-    description: 'Geography turns disconnected information into operational understanding.',
+    description: siteDescription,
     type: 'website',
     locale: 'en_US',
   },

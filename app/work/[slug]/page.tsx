@@ -18,12 +18,12 @@ export default async function WorkDetailPage({ params }: Props) {
   const next = workExamples[(workExamples.indexOf(example) + 1) % workExamples.length];
   return <><PageIntro label="Illustrative workflow" back={{ href: '/work', label: 'Work' }} title={example.title} description={example.summary} />
     <div className="shell project-detail">
-      <div className="project-overview"><ProjectVisual visual={example.visual} /><aside className="project-facts"><p className="eyebrow">At a glance</p><dl><dt>Application</dt><dd>{example.discipline}</dd><dt>Geographic scale</dt><dd>{example.scale}</dd><dt>Example type</dt><dd>Illustrative workflow</dd></dl><p>A proposed information workflow, with example outputs. No completed client engagement or performance result is implied.</p></aside></div>
-      <section className="project-section"><div><p className="eyebrow">01 / The challenge</p><h2>The question behind<br />the information.</h2></div><p className="project-prose">{example.challenge}</p></section>
-      <section className="project-section"><div><p className="eyebrow">02 / The information</p><h2>Give separate sources<br />a shared context.</h2></div><ul className="source-list">{example.sources.map(source => <li key={source}>{source}</li>)}</ul></section>
-      <section className="project-section"><div><p className="eyebrow">03 / The approach</p><h2>Build around<br />the decision.</h2></div><ol className="detail-steps">{example.approach.map(step => <li key={step.title}><h3>{step.title}</h3><p>{step.detail}</p></li>)}</ol></section>
-      <section className="project-section"><div><p className="eyebrow">04 / The outputs</p><h2>Make the result<br />usable.</h2></div><div className="output-list">{example.outputs.map(output => <div key={output.title}><h3>{output.title}</h3><p>{output.detail}</p></div>)}</div></section>
-      <section className="feedback-note"><span className="feedback-symbol" aria-hidden="true">↳</span><div><h2>The work feeds the next observation.</h2><p>{example.feedback}</p></div></section>
+      <div className="project-overview"><ProjectVisual visual={example.visual} /><aside className="project-facts" aria-label="Workflow details"><dl><dt>Application</dt><dd>{example.discipline}</dd><dt>Geographic scale</dt><dd>{example.scale}</dd></dl></aside></div>
+      <section className="project-section"><h2>Challenge</h2><p className="project-prose">{example.challenge}</p></section>
+      <section className="project-section"><h2>Data sources</h2><ul className="source-list">{example.sources.map(source => <li key={source}>{source}</li>)}</ul></section>
+      <section className="project-section"><h2>Approach</h2><ol className="detail-steps">{example.approach.map(step => <li key={step.title}><h3>{step.title}</h3><p>{step.detail}</p></li>)}</ol></section>
+      <section className="project-section"><h2>Example outputs</h2><div className="output-list">{example.outputs.map(output => <div key={output.title}><h3>{output.title}</h3><p>{output.detail}</p></div>)}</div></section>
+      <section className="feedback-note"><div><h2>Follow-up</h2><p>{example.feedback}</p></div></section>
       <Link className="next-story" href={`/work/${next.slug}`}><span><span className="eyebrow">Next workflow</span><strong>{next.title}</strong></span><Arrow diagonal /></Link>
     </div><ContactCTA /></>;
 }

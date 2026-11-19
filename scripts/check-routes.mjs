@@ -54,7 +54,9 @@ while (queue.length) {
     const draft = new URL(draftHref);
     assert.equal(draft.pathname, 'support@372geomedia.com');
     assert(draft.searchParams.get('subject')?.includes('372 GeoMedia'));
-    assert(draft.searchParams.get('body')?.includes('understand, connect or build'));
+    const questions = [...html.matchAll(/<h3>([^<]+\?)<\/h3>/g)].map(match => unescape(match[1]));
+    assert.equal(questions.length, 3, 'Talk page includes the three project questions');
+    assert(questions.every(question => draft.searchParams.get('body')?.includes(question)), 'Email draft includes each project question');
   }
   pages.set(path, html);
 }
@@ -64,6 +66,6 @@ assert.equal(pages.size, 8, 'The home page, four section pages and three work pa
 for (const path of ['/work/does-not-exist', '/insights', '/does-not-exist']) {
   const response = await fetch(new URL(path, base));
   assert.equal(response.status, 404, `${path}: return an actual 404 status`);
-  assert((await response.text()).includes('back on course'), `${path}: branded recovery content`);
+  assert((await response.text()).includes('<h1>Page not found</h1>'), `${path}: recovery heading`);
 }
 console.log(`Passed: ${pages.size} pages, local navigation, metadata, fragments, email draft and 3 missing-page responses.`);

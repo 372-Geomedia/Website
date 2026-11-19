@@ -4,7 +4,7 @@ import { talk } from '@/lib/site-content';
 
 export function ContactCTA() {
   return <section className="contact-cta" aria-labelledby="contact-cta-heading"><div className="shell contact-cta-inner">
-    <div><p className="eyebrow"><span className="red-square" />Start with the question</p><h2 id="contact-cta-heading">Bring the whole picture<br />into view.</h2><p>Tell us what you’re trying to understand, connect or build.</p></div>
-    <Link className="button button-red" href={talk.href}>Start a conversation <Arrow diagonal /></Link>
+    <h2 id="contact-cta-heading">Tell us about your project.</h2>
+    <Link className="button button-red" href={talk.href}>{talk.label} <Arrow diagonal /></Link>
   </div></section>;
 }

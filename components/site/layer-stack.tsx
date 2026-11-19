@@ -10,8 +10,8 @@ export function LayerStack() {
     // An inline SVG needs its image role to expose its title and description.
     // oxlint-disable-next-line jsx-a11y/prefer-tag-over-role
     <svg className="layer-stack" viewBox="0 0 570 540" role="img" aria-labelledby="layer-title layer-description">
-      <title id="layer-title">Information connected through shared geography</title>
-      <desc id="layer-description">Three aligned map layers show geographic context, infrastructure and networks, and observations. Their shared locations allow separate sources of information to be understood together.</desc>
+      <title id="layer-title">Map layers in Galveston Bay</title>
+      <desc id="layer-description">Three stacked maps share the same coastline. The lower map shows the land and water, the middle map adds roads, and the upper map marks sample observation sites.</desc>
       <defs>
         <pattern id="layer-grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M100 0H0V100" fill="none" stroke="#8c9788" strokeWidth="1" /></pattern>
         <g id="layer-context"><path d={layers.land.path} fill="#b1baa7" fillRule="evenodd" /><path d={layers.coastline.path} fill="none" stroke="#6b7b66" strokeWidth="2" /></g>
@@ -36,11 +36,11 @@ export function LayerStack() {
         {[[589, 220], [795, 482], [867, 604], [380, 398], [630, 566]].map(([x, y]) => <g key={x}><circle cx={x} cy={y} r="22" fill="none" stroke="#bd2b29" strokeWidth="2" opacity=".35" /><circle cx={x} cy={y} r="6" fill="#bd2b29" /></g>)}
       </g>
       <g className="layer-label">
-        <text x="27" y="43"><tspan className="layer-number">03</tspan><tspan dx="13">Observations</tspan></text>
+        <text x="27" y="43">Observations</text>
         <path className="layer-label-line" d="M28 55H134L174 98" />
-        <text x="375" y="301"><tspan className="layer-number">02</tspan><tspan dx="10">Networks</tspan></text>
+        <text x="375" y="301">Networks</text>
         <path className="layer-label-line" d="M374 311H506V259" />
-        <text x="26" y="451"><tspan className="layer-number">01</tspan><tspan dx="13">Geography</tspan></text>
+        <text x="26" y="451">Geography</text>
         <path className="layer-label-line" d="M27 428V411H68" />
       </g>
     </svg>

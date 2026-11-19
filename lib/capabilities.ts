@@ -2,7 +2,6 @@ export type CapabilityKind = 'response' | 'platforms' | 'analysis' | 'software' 
 
 type Capability = {
   kind: CapabilityKind;
-  field: string;
   title: string;
   description: string;
   applications: string[];
@@ -13,9 +12,8 @@ type Capability = {
 export const capabilities: Capability[] = [
   {
     kind: 'response',
-    field: 'Response & recovery',
     title: 'Emergency Management',
-    description: 'Track missions, assets and field teams in one operational picture—from the first report through recovery.',
+    description: 'Help coordinators track damage reports, available crews and open assignments during response and recovery.',
     applications: [
       'Situational awareness & mission tracking',
       'Blue Roof, debris & temporary power operations',
@@ -24,9 +22,8 @@ export const capabilities: Capability[] = [
   },
   {
     kind: 'platforms',
-    field: 'Shared environments',
     title: 'Geospatial Platforms',
-    description: 'Stand up, assess and improve the GIS your organization depends on, whether on premises or in the cloud.',
+    description: 'Set up and maintain GIS platforms on your servers or in the cloud.',
     applications: [
       'Enterprise & cloud GIS',
       'Collaborative maps, dashboards & forms',
@@ -35,9 +32,8 @@ export const capabilities: Capability[] = [
   },
   {
     kind: 'analysis',
-    field: 'Patterns & possibilities',
     title: 'Spatial Analysis & GeoAI',
-    description: 'Use geography, imagery and AI-assisted models to find patterns, assess hazards and compare locations.',
+    description: 'Analyze imagery and model hazards to assess which properties are exposed.',
     applications: [
       'Hazard, vulnerability & imagery analysis',
       'Property analysis & commercial site selection',
@@ -46,9 +42,8 @@ export const capabilities: Capability[] = [
   },
   {
     kind: 'software',
-    field: 'Purpose-built tools',
     title: 'Custom Software',
-    description: 'Build applications around the way your teams actually work, instead of reshaping the work to fit the tool.',
+    description: 'Build web, desktop and mobile tools for inspections, work orders and reporting.',
     applications: [
       'Web, desktop & field applications',
       'Assignments, status tracking & reporting',
@@ -57,9 +52,8 @@ export const capabilities: Capability[] = [
   },
   {
     kind: 'integration',
-    field: 'Information in motion',
     title: 'Data Engineering & Integration',
-    description: 'Connect the systems you already have so location data moves between them cleanly—and can be traced.',
+    description: 'Connect field and office systems so teams can trace each update to its source.',
     applications: [
       'ETL, APIs & spatial databases',
       'Sensors, field data & real-time feeds',
@@ -68,9 +62,8 @@ export const capabilities: Capability[] = [
   },
   {
     kind: 'planning',
-    field: 'People & place',
     title: 'Community & Planning',
-    description: 'Turn parcels, zoning and local data into maps that residents and decision-makers can use.',
+    description: 'Map parcels, zoning and infrastructure so planners and residents can compare development options.',
     applications: [
       'StoryMaps & public engagement tools',
       'Zoning, parcels & infrastructure insights',
