@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">A parcel divided into two lots</title>
+  <desc id="desc">A cadastral map shows a single green perimeter enclosing Parcel A and Parcel B. A dashed rust line marks the new boundary between them.</desc>
+  <defs>
+    <pattern id="hatching" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(39)">
+      <path d="M0 0V10" fill="none" stroke="#ae7862" stroke-width="1.5" opacity=".28"/>
+    </pattern>
+    <g id="corner">
+      <circle r="4.8" fill="#f7f5e8" stroke="#244b3a" stroke-width="2.5"/>
+    </g>
+  </defs>
+  <rect width="960" height="600" fill="#e7e9dc"/>
+  <g transform="rotate(-13 480 300)">
+    <!-- Neighboring fields and lots share edges with the road corridors. -->
+    <g fill="#dce2d0">
+      <path d="M-120-140H77V98H-120zM304-140H475V98H304zM625-140H789V98H625z"/>
+      <path d="M-95 131H49V290H-95zM67 290H209V434L67 424z"/>
+      <path d="M709 126H837V268H709zM837 268H1035V443H837z"/>
+      <path d="M315 463L476 475V700H311zM675 473L820 461V700H675z"/>
+    </g>
+    <g fill="none" stroke="#a6b19c" stroke-width="2" stroke-linejoin="round">
+      <path d="M-130 98H1080M-130 27H77M77-140V98M181-140L185 98M304-140V98M475-140V98M625-140V98M789-140V98M937-140V98"/>
+      <path d="M-130 132H215M49 131V290M-130 290H211M67 290V424M-130 399L67 424L209 434"/>
+      <path d="M255 126H1075M709 126V442M837 126V443M709 268H1075M943 126V268M949 268V444M709 357H837"/>
+      <path d="M-120 481L94 457L248 457L476 475H675L875 456L1080 473M82 460L65 714M183 457L167 720M315 463L311 716M476 475V720M675 475V720M820 461V720M960 463V716"/>
+    </g>
+    <g fill="#c0c6b5" stroke="#a1ab99" stroke-width="1.2">
+      <path d="M98 46h35v18h-13v9H98zM351 52h34v21h-34zM547 43h47v22h-47zM811 51h26v14h11v12h-37z"/>
+      <path d="M123 169h27v20h-27zM122 348h35v15h-13v9h-22zM754 182h32v17h-32zM883 322h47v18h-47z"/>
+      <path d="M352 518h37v21h-37zM534 514h38v20h-38zM749 517h24v18h-24z"/>
+    </g>
+    <!-- Pale road surfaces and their surveyed edges. -->
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M-150 115H1100" stroke="#a4ac99" stroke-width="29"/>
+      <path d="M233-170V186C233 228 220 248 220 285V436Q220 451 206 466L91 620L27 758" stroke="#a4ac99" stroke-width="23"/>
+      <path d="M-120 458L65 435Q93 431 127 436L240 447L474 465H672L870 445L1090 463" stroke="#a4ac99" stroke-width="15"/>
+      <path d="M-150 115H1100" stroke="#faf8ed" stroke-width="25"/>
+      <path d="M233-170V186C233 228 220 248 220 285V436Q220 451 206 466L91 620L27 758" stroke="#faf8ed" stroke-width="19"/>
+      <path d="M-120 458L65 435Q93 431 127 436L240 447L474 465H672L870 445L1090 463" stroke="#faf8ed" stroke-width="11"/>
+    </g>
+    <!-- The sibling polygons meet exactly on the new survey line. -->
+    <path d="M499 130H245V186C245 228 232 249 232 285V436L472 455H494L513 282z" fill="#c3d7af"/>
+    <path d="M499 130H698V443L671 455H494L513 282z" fill="#e7cbb4"/>
+    <path d="M499 130H698V443L671 455H494L513 282z" fill="url(#hatching)"/>
+    <path d="M245 130H698V443L671 455H472L232 436V285C232 249 245 228 245 186z" fill="none" stroke="#244b3a" stroke-width="5.5" stroke-linejoin="round"/>
+    <path d="M499 130L513 282L494 455" fill="none" stroke="#9b4d31" stroke-width="5" stroke-dasharray="12 8" stroke-linecap="butt" stroke-linejoin="round"/>
+    <g>
+      <use href="#corner" x="245" y="130"/>
+      <use href="#corner" x="698" y="130"/>
+      <use href="#corner" x="698" y="443"/>
+      <use href="#corner" x="671" y="455"/>
+      <use href="#corner" x="472" y="455"/>
+      <use href="#corner" x="232" y="436"/>
+      <circle cx="499" cy="130" r="5.5" fill="#9b4d31" stroke="#f7f5e8" stroke-width="2"/>
+      <circle cx="494" cy="455" r="5.5" fill="#9b4d31" stroke="#f7f5e8" stroke-width="2"/>
+    </g>
+    <g fill="#234634" font-family="Georgia, 'Times New Roman', serif" font-size="39" text-anchor="middle">
+      <text x="366" y="304">Parcel A</text>
+      <text x="601" y="304">Parcel B</text>
+    </g>
+  </g>
+  <g transform="translate(28 530)">
+    <rect width="474" height="48" rx="3" fill="#f8f7ed" stroke="#b5bdab"/>
+    <g font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#354a3a">
+      <path d="M15 24h37" fill="none" stroke="#244b3a" stroke-width="4"/>
+      <text x="62" y="32">Original parcel</text>
+      <path d="M243 24h39" fill="none" stroke="#9b4d31" stroke-width="4" stroke-dasharray="8 5"/>
+      <text x="292" y="32">New boundary</text>
+    </g>
+  </g>
+</svg>
