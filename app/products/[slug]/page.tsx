@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ProductImage } from '@/components/site/product-image';
+import { ProductScreenshots } from '@/components/site/product-screenshots';
 import { pageMetadata } from '@/lib/page-metadata';
 import { products } from '@/lib/products';
 import { company } from '@/lib/site-content';
@@ -44,11 +45,32 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </div>
       </div>
-      <section className="shell product-workflow" aria-labelledby="workflow-heading">
-        <div className="product-example">
-          <h2 id="workflow-heading">{product.example.title}</h2>
-          <p>{product.example.description}</p>
+      <nav className="product-section-nav" aria-label={`${product.name} page sections`}>
+        <div className="shell">
+          <a href="#screenshots">Screenshots</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#capabilities">Capabilities</a>
         </div>
+      </nav>
+      <ProductScreenshots product={product} />
+      <section className="product-workflow-band" aria-labelledby="workflow">
+        <div className="shell product-workflow">
+          <div className="product-example">
+            <h2 id="workflow">{product.example.title}</h2>
+            <p>{product.example.description}</p>
+          </div>
+          <ol className="product-steps">
+            {product.example.steps.map(step => (
+              <li key={step.title}>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+      <section className="shell product-capabilities" aria-labelledby="capabilities">
+        <h2 id="capabilities">Capabilities</h2>
         <div className="product-features">
           {product.features.map(feature => (
             <div key={feature.title}>

@@ -74,9 +74,11 @@ All company navigation stays within the local site. The hero's What we do link s
 | `/about` | Company perspective, the 372 name story, working principles, and combined experience |
 | `/talk` | Talk with us: published company email, a prefilled email-draft link, and three starting prompts |
 | `/products` | Unlisted menu for the three product drafts |
-| `/products/372-strata`, `/products/gismaster`, `/products/geofara` | Product marketing pages with a return link to the menu |
+| `/products/372-strata`, `/products/gismaster`, `/products/geofara` | Product screenshots with full-size views, a worked example, capabilities and an inquiry link |
 
 Share the Products menu or an individual product URL directly. All four pages set `noindex` and are accessible to anyone with the link.
+
+`lib/products.ts` holds the product copy, screenshot captions and source credits. Strata’s screenshots use public Texas datasets and the bundled Stratton survey. The GISMaster prototype screens use fictional parcel records and demonstration Collector data. Geofara’s screenshots come from the Android editor’s sample projects. The WebP files are in `public/products/`.
 
 `lib/work.ts` holds the detail records. Dynamic pages use async parameters, `generateStaticParams`, `dynamicParams = false`, and `notFound()` for unknown slugs. `app/not-found.tsx` provides a recovery page. Each route has its own title and description; no publication dates or authors are fabricated.
 

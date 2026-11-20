@@ -45,7 +45,10 @@
 }
 
 .product-summary,
-.product-workflow p {
+.product-workflow p,
+.product-features p,
+.product-section-intro p,
+.screen-figure figcaption p {
   color: #55614f;
   font-size: 1rem;
   line-height: 1.8;
@@ -125,6 +128,101 @@
   line-height: 1.85;
 }
 
+.product-section-nav {
+  border-bottom: 1px solid var(--border);
+}
+
+.product-section-nav .shell {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .25rem clamp(1.1rem, 3vw, 3rem);
+}
+
+.product-section-nav a {
+  padding-block: 1.05rem;
+  font-size: .9375rem;
+  text-decoration: underline;
+  text-underline-offset: .27em;
+  text-decoration-color: #a6afa2;
+}
+
+.product-section-nav a:hover,
+.screen-link:hover span { color: var(--primary); }
+
+.product-screens,
+.product-capabilities {
+  padding-block: clamp(2.75rem, 5vw, 5rem);
+}
+
+.product-section-intro {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.75rem);
+}
+
+.product-section-intro p { max-width: 50ch; }
+.screen-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.75rem, 3.5vw, 3.5rem);
+}
+
+.screen-figure { min-width: 0; }
+.screen-grid:has(> :nth-child(3)) .screen-figure:first-child {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 4.5vw, 5rem);
+  align-items: center;
+  padding-bottom: clamp(1.5rem, 3vw, 3rem);
+  border-bottom: 1px solid var(--border);
+}
+
+.screen-link {
+  display: block;
+  border: 1px solid #bfc6bb;
+  background: #e9ece6;
+  color: #354235;
+  cursor: zoom-in;
+}
+
+.screen-link img { display: block; width: 100%; height: auto; }
+.screen-link span {
+  display: block;
+  padding: .3rem .8rem;
+  border-top: 1px solid #ccd2c8;
+  font-size: .8125rem;
+  line-height: 1.5;
+  text-align: right;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.screen-figure figcaption { padding-block: .9rem; max-width: 58ch; }
+.screen-figure figcaption h3 {
+  font-size: clamp(1.3rem, 1.9vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -.035em;
+}
+
+.screen-figure figcaption p { margin-top: .5rem; }
+.screen-figure .product-credits {
+  display: block;
+  margin-top: .7rem;
+  color: #596653;
+  font-size: .8125rem;
+  line-height: 1.6;
+}
+
+.product-workflow-band {
+  background: #eceee7;
+  border-block: 1px solid var(--border);
+}
+
 .product-workflow {
   display: grid;
   grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
@@ -132,8 +230,9 @@
   padding-block: clamp(3rem, 6vw, 6rem);
 }
 
-.product-example h2 {
-  max-width: 18ch;
+.product-example h2,
+.product-section-intro h2,
+.product-capabilities h2 {
   font-size: clamp(2rem, 3.4vw, 3.5rem);
   line-height: 1.16;
   letter-spacing: -.05em;
@@ -141,14 +240,33 @@
   text-wrap: balance;
 }
 
+.product-example h2 { max-width: 18ch; }
 .product-example p { margin-top: 1.25rem; max-width: 48ch; }
+.product-steps { margin: 0; padding-left: 1.8rem; list-style: decimal; }
+.product-steps li { padding: 0 0 1.1rem .7rem; }
+.product-steps li + li { padding-top: 1.1rem; border-top: 1px solid #cbd2c5; }
+.product-steps li:last-child { padding-bottom: 0; }
+.product-steps li::marker {
+  color: #8d2e26;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 1rem;
+}
+
+.product-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .5rem clamp(1.5rem, 3.5vw, 3.5rem);
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+
 .product-features > div {
   padding-block: 1.2rem;
   border-top: 1px solid var(--border);
 }
 
 .product-features > div:last-child { padding-bottom: 0; }
-.product-features h3 {
+.product-features h3,
+.product-steps h3 {
   margin-bottom: .4rem;
   font-size: 1.25rem;
   font-weight: 500;
@@ -161,10 +279,23 @@
   .product-introduction,
   .product-example p { max-width: 65ch; }
   .product-example h2 { max-width: 26ch; }
+  .product-features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 760px) {
   .product-menu { grid-template-columns: 1fr; row-gap: 2rem; }
   .product-card { display: block; grid-row: auto; }
   .product-card h2 { font-size: 2.25rem; }
+  .product-section-intro,
+  .screen-grid { grid-template-columns: 1fr; }
+  .product-section-intro { gap: .75rem; }
+  .screen-grid:has(> :nth-child(3)) .screen-figure:first-child {
+    display: block;
+    padding: 0;
+    border: 0;
+  }
+}
+
+@media (max-width: 550px) {
+  .product-features { grid-template-columns: 1fr; gap: 0; }
 }

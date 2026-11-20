@@ -1,3 +1,12 @@
+type Credit = { label: string; href: string };
+type ProductImage = {
+  src: string;
+  alt: string;
+  caption: string;
+  credits?: Credit[];
+};
+type Feature = { title: string; description: string };
+
 export type Product = {
   slug: string;
   name: string;
@@ -5,16 +14,20 @@ export type Product = {
   summary: string;
   headline: string;
   introduction: string;
-  image: {
-    src: string;
-    alt: string;
-    caption: string;
-    credits?: { label: string; href: string }[];
-  };
-  example: { title: string; description: string };
-  features: { title: string; description: string }[];
+  image: ProductImage;
+  screenshotIntro: string;
+  screenshots: (ProductImage & { title: string; width: number; height: number })[];
+  example: Feature & { steps: Feature[] };
+  features: Feature[];
   inquiry: string;
 };
+
+const strattonCredit = [{ label: 'Bureau of Economic Geology, UT Austin · SEG', href: 'https://wiki.seg.org/wiki/Stratton_3D_survey' }];
+const basemapCredits = [
+  { label: '© OpenStreetMap contributors', href: 'https://www.openstreetmap.org/copyright' },
+  { label: 'OpenMapTiles', href: 'https://openmaptiles.org/' },
+  { label: 'OpenFreeMap', href: 'https://openfreemap.org/' },
+];
 
 export const products: Product[] = [
   {
@@ -28,16 +41,51 @@ export const products: Product[] = [
       src: '/products/372-strata.webp',
       alt: 'Red and blue seismic reflections along two sides of a Stratton survey block meet a horizontal slice at 4,000 feet below sea level.',
       caption: 'Stratton field, South Texas. Line 90 and trace 55 meet beneath the 4,000-foot depth slice.',
-      credits: [{ label: 'Bureau of Economic Geology, UT Austin · SEG', href: 'https://wiki.seg.org/wiki/Stratton_3D_survey' }],
+      credits: strattonCredit,
     },
+    screenshotIntro: 'Explore a Texas county, its surface geology and the seismic section through a reference well.',
+    screenshots: [
+      {
+        title: 'Read wells against the surface geology',
+        src: '/products/strata-geology-map.webp', width: 1600, height: 1000,
+        alt: 'Water-well markers over colored surface rock units in Kleberg County, with layer and reported-depth controls beside the map.',
+        caption: 'These are saved groundwater records for Kleberg County. Filter the wells by reported depth, then select a well or a rock unit to inspect its source attributes.',
+        credits: [
+          { label: 'Texas Water Development Board', href: 'https://www.twdb.texas.gov/groundwater/data/data-well-reports.asp' },
+          { label: 'Geologic Atlas of Texas', href: 'https://feature.geographic.texas.gov/arcgis/rest/services/Geologic_Database/GeologicDatabaseofTexas_250k/MapServer' },
+        ],
+      },
+      {
+        title: 'Choose what to download',
+        src: '/products/strata-county-atlas.webp', width: 1600, height: 1000,
+        alt: 'Texas county atlas with Kleberg highlighted and the oil, gas and groundwater download options open.',
+        caption: 'Select a county to choose its oil and gas records. Geology and groundwater layers can be downloaded separately for the same workspace.',
+        credits: [{ label: 'County boundaries from the U.S. Census Bureau', href: 'https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2024/State_County/MapServer/11' }],
+      },
+      {
+        title: 'Follow a sand top across wells',
+        src: '/products/strata-well-section.webp', width: 1378, height: 455,
+        alt: 'Seven well tracks over red and blue seismic reflections, with sand-top picks and the tracked B46 surface.',
+        caption: 'Stratton line 199 runs 2.4 miles west to east through well 9. The section shows the distance of each projected well from the line, its sand picks and any available logs.',
+        credits: strattonCredit,
+      },
+    ],
     example: {
       title: 'Build a section through nearby wells',
-      description: 'Choose a well from a county package with wellbore records. Its cross section lines up filed formation depths, perforations and total depths in neighboring wells so you can see where the records agree and where a pick is missing.',
+      description: 'A formation listed in one well may be missing from the next well’s filing. A cross section lets you compare what each operator reported.',
+      steps: [
+        { title: 'Choose the county and records', description: 'In the Texas atlas, download a county with the Maps + wellbore records package. Open the county in 3D and select a well to see its operator, field and filed depth.' },
+        { title: 'Line up the neighbors', description: 'Choose “Section through it” to place nearby wells side by side. Read the formation depths, perforated intervals and total depth for each well.' },
+        { title: 'Check a pick against a log', description: 'Open a LAS log and formation-top table in the file inspector. When the depth references agree, compare the picked top with the curve at that depth.' },
+      ],
     },
     features: [
       { title: 'Put a well in context', description: 'Overlay aquifer footprints, water wells, soils and surface geology with oil and gas well locations from the Railroad Commission of Texas.' },
       { title: 'Inspect your own files', description: 'Read a curve by depth in a LAS well log, examine a directional survey or step through a section from a SEG-Y seismic file.' },
       { title: 'Reopen a county offline', description: 'Download the county and the layers you need before leaving the office. Saved records remain available for local review.' },
+      { title: 'Screen a proposed site', description: 'Drop a pin, set a radius and list nearby water wells, drillers’ reports and oil and gas well locations. Export the records as CSV or a printable map and source inventory as HTML.' },
+      { title: 'Compare groundwater observations', description: 'Set the ends and width of a groundwater section. Compare dated water levels and screened intervals across the wells in that corridor.' },
+      { title: 'Read production by reporting unit', description: 'Review oil by lease and gas by gas-well ID. When several wells share a reporting unit, its production is counted once.' },
     ],
     inquiry: 'Which Texas county are you studying?',
   },
@@ -53,14 +101,43 @@ export const products: Product[] = [
       alt: 'An illustrated parcel division showing two successor lots inside the original boundary.',
       caption: 'Illustrative parcel division. A new boundary creates two successor parcels.',
     },
+    screenshotIntro: 'These prototype screens use fictional parcel records. County office exchanges use demonstration data.',
+    screenshots: [
+      {
+        title: 'Check the tax history',
+        src: '/products/gismaster-collector.webp', width: 1320, height: 840,
+        alt: 'Collector tab for a fictional parcel, with ten paid tax years and an itemized 2026 bill.',
+        caption: 'The Collector tab pairs the selected year’s bill with a history of balances and payments. A mapper can see the evidence behind the tax check before dividing a parcel.',
+      },
+      {
+        title: 'Prepare the split',
+        src: '/products/gismaster-split.webp', width: 1320, height: 872,
+        alt: 'Split parcel form showing proposed IDs and deeded acres for Lots A and B, with the option to retire the parent selected.',
+        caption: 'Preview the new parcel identifiers, assign lot labels and deeded acreage, and record the plat that explains the change.',
+      },
+      {
+        title: 'Follow the successors',
+        src: '/products/gismaster-lineage.webp', width: 1320, height: 872,
+        alt: 'History tab of the retired demo parcel, with links to both successors above four recorded documents.',
+        caption: 'After the split, the retired parent links to both new parcels and retains its four recorded instruments. A reviewer can follow either successor back to this source.',
+      },
+    ],
     example: {
       title: 'Follow the record after a parcel changes',
-      description: 'When a tract is divided, a mapper can follow the original parcel to its successors. When parcels are combined, the surviving record links back to each retired parcel, where its ownership and document history remain available.',
+      description: 'Suppose two tracts are being combined under one parcel identifier. A county mapper needs to preserve the history of both and give the next reviewer a way back to the original records.',
+      steps: [
+        { title: 'Identify the surviving parcel', description: 'Open the record that will keep its identifier. Choose “Combine parcels,” add the identifiers to retire and record the reason for the change.' },
+        { title: 'Check the tax history', description: 'The prototype checks each affected collector account for a complete history and past-due bills. It saves the operator, time and outcome, including a check that stops the change.' },
+        { title: 'Follow the history in either direction', description: 'Open History on the surviving record to reach the retired parcels. Each retired record links back and retains its ownership and documents. The mapper can then update the survivor’s acreage and legal description from the instrument.' },
+      ],
     },
     features: [
-      { title: 'Review the supporting records', description: 'Find a parcel and review its recorded documents, ownership history and taxing districts before applying a change.' },
-      { title: 'Document the tax check', description: 'Before a division, combination or retirement, the prototype checks the collector account and records who ran the check, when it ran and the result.' },
-      { title: 'Share the right records', description: 'Staff with export permission can download a filtered list of parcels, document histories or taxing districts. Protected owner details have separate access controls.' },
+      { title: 'Find a parcel from an old deed', description: 'Search by parcel ID, owner, street, subdivision or document number. Include prior ownership to find a tract when the name on the deed has since changed.' },
+      { title: 'Trace a corrected record', description: 'The Changes tab keeps before-and-after field values, the source of the change and comments. The History tab keeps the recorded instruments behind the parcel.' },
+      { title: 'Assign taxing districts', description: 'Import the county’s district definitions, then apply a master tax code to a parcel to assign its school, fire and other jurisdictions together.' },
+      { title: 'Compare valuation years', description: 'Select a saved tax year to review land, improvement and assessed values. The prototype demonstrates this exchange with a stand-in Assessor system.' },
+      { title: 'Protect owner details', description: 'Access to protected records requires a separate grant. When parcels are combined, active protections on a source carry forward to the surviving record.' },
+      { title: 'Hand off a filtered search', description: 'Staff with export permission can download matching parcels, document histories or taxing districts as CSV. They can also prepare a parcel tracking report or subdivision routing slip for PDF output.' },
     ],
     inquiry: 'How does your county track parcel changes?',
   },
@@ -75,20 +152,46 @@ export const products: Product[] = [
       src: '/products/geofara.webp',
       alt: 'Geofara’s layer panel beside a street map with two labeled valves, a dashed trail and a parcel boundary.',
       caption: 'Valves, a trail and a parcel in the Geofara tablet workspace.',
-      credits: [
-        { label: '© OpenStreetMap contributors', href: 'https://www.openstreetmap.org/copyright' },
-        { label: 'OpenMapTiles', href: 'https://openmaptiles.org/' },
-        { label: 'OpenFreeMap', href: 'https://openfreemap.org/' },
-      ],
+      credits: basemapCredits,
     },
+    screenshotIntro: 'Three views from the Android tablet editor show how field observations become features, records and printed maps.',
+    screenshots: [
+      {
+        title: 'Inspect a mapped tree',
+        src: '/products/geofara-inspector.webp', width: 1280, height: 800,
+        alt: 'Tree T01 selected on the Golden Gate Park sample map, with a highlighted table row and its feature inspector open.',
+        caption: 'Select a tree in the sample inventory to see its species, height, trunk diameter and condition alongside its location on the map.',
+        credits: basemapCredits,
+      },
+      {
+        title: 'Shape a trail alignment',
+        src: '/products/geofara-curve.webp', width: 1440, height: 900,
+        alt: 'An orange arc previews a bend in the selected trail segment, with radius, length and an Apply curve control.',
+        caption: 'The vertex editor keeps both endpoints fixed while you set the bend. Read the radius and arc length before applying the curve.',
+      },
+      {
+        title: 'Lay out a field map',
+        src: '/products/geofara-layout.webp', width: 1440, height: 900,
+        alt: 'Page one of a two-page layout with a Golden Gate Park map, a tree legend, a scale bar and a selected notes box.',
+        caption: 'Arrange the map, legend and field notes on a printable sheet. The project saves the layout for its next PDF export.',
+      },
+    ],
     example: {
       title: 'Inspect a row of assets in one visit',
-      description: 'Download a basemap before departure. At each valve, collect its position, record its condition and attach a photo. The inspection template can carry the inspector’s name into the next entry and clear the fields that need a fresh observation.',
+      description: 'For a valve survey, the crew needs a map it can take offline, a consistent inspection form and a file the office can reopen with the photos attached.',
+      steps: [
+        { title: 'Prepare the area', description: 'Download the basemap while connected. Set up the asset inspection layer with the fields the crew needs at each stop, including condition and photos.' },
+        { title: 'Collect the next observation', description: 'Capture the valve’s position, record its condition and take a photo. “Save & collect next” can keep the inspector’s name and clear the observation fields for the next valve.' },
+        { title: 'Return the inspection', description: 'Review the records in the attribute table. Export the layer to GeoPackage to hand over the geometry, attributes and photos together.' },
+      ],
     },
     features: [
       { title: 'Capture the location', description: 'Use the tablet’s GPS or a paired GNSS receiver to collect a point or track. Snap a new boundary to an existing vertex or trace a shared edge.' },
       { title: 'Build a form for the job', description: 'Define required fields and choices, scan an asset barcode or show a follow-up question when an inspection response calls for one.' },
-      { title: 'Bring edits back to the office', description: 'Export a GeoPackage with photos linked to their features, or connect to PostgreSQL to edit a supported PostGIS table directly.' },
+      { title: 'Keep repeat inspections together', description: 'Link each visit to its parent asset. Open the asset to see its related records, then add a new inspection with its own date, observations and attachments.' },
+      { title: 'Edit shared boundaries', description: 'Move a common corner or insert a vertex on a shared edge. Preview the neighboring polygons involved and apply the edits together.' },
+      { title: 'Sync field edits to PostGIS', description: 'Edit a supported PostGIS layer directly, or take an editable copy offline. On reconnect, compare conflicting tablet and database edits before syncing.' },
+      { title: 'Print a map for the crew', description: 'Set the paper size and map extent, place a legend and scale bar, and add field notes. Export the saved layout to PDF.' },
     ],
     inquiry: 'What does your crew need to capture in the field?',
   },

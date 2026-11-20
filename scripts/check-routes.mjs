@@ -40,6 +40,9 @@ while (queue.length) {
 
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(new Set(ids).size, ids.length, `${path}: unique DOM IDs`);
+  const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] || '';
+  const images = [...main.matchAll(/<img\b[^>]*>/g)].map(match => match[0]);
+  const imageLinks = new Set(images.map(tag => attribute(tag, 'src')));
   const links = [...html.matchAll(/<a\b[^>]*>/g)].map(match => attribute(match[0], 'href'));
   for (const href of links) {
     assert(href, `${path}: no empty link destinations`);
@@ -47,7 +50,7 @@ while (queue.length) {
     const target = new URL(href, new URL(path, base));
     if (target.origin === base.origin) {
       if (!isProductPath(path)) assert(!isProductPath(target.pathname), `${path}: public pages must not link to ${target.pathname}`);
-      if (!pages.has(target.pathname)) queue.push(target.pathname);
+      if (!imageLinks.has(href) && !pages.has(target.pathname)) queue.push(target.pathname);
     }
     assert(!/^https?:\/\/372geomedia\.com/.test(href), `${path}: company navigation should stay local`);
   }
@@ -67,9 +70,17 @@ while (queue.length) {
       assert(navHrefs.includes(dest), `${path}: ${navLabel} links to ${dest}`);
     }
 
-    const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] || '';
-    const images = [...main.matchAll(/<img\b[^>]*>/g)].map(match => match[0]);
-    assert.equal(images.length, menu ? productPaths.length : 1, `${path}: show imagery for each featured product`);
+    if (menu) {
+      assert.equal(images.length, productPaths.length, 'The menu includes one image per product');
+    } else {
+      const screenshots = [...main.matchAll(/<a\b[^>]*class="screen-link"[^>]*>([\s\S]*?)<\/a>/g)];
+      assert(screenshots.length >= 2, `${path}: multiple interface views`);
+      assert.equal(imageLinks.size, screenshots.length + 1, `${path}: distinct screenshots and a hero image`);
+      for (const [link, content] of screenshots) {
+        const src = attribute(content.match(/<img\b[^>]*>/)?.[0] || '', 'src');
+        assert(src && attribute(link, 'href') === src, `${path}: each screenshot opens at full size`);
+      }
+    }
     for (const image of images) {
       const src = attribute(image, 'src');
       assert(src && attribute(image, 'alt').trim(), `${path}: product imagery has a source and a description`);
@@ -94,7 +105,6 @@ while (queue.length) {
 
 assert.equal([...pages.keys()].filter(path => !isProductPath(path)).length, 8, 'The home page, four section pages and three work pages should be reachable.');
 assert.deepEqual(new Set([...pages.keys()].filter(isProductPath)), new Set(['/products', ...productPaths]), 'The unlisted menu and three product drafts should be reachable.');
-assert.equal(productImages.size, productPaths.length, 'The three products should each have their own image.');
 for (const url of productImages) {
   const image = await fetch(url);
   assert.equal(image.status, 200, `${url}: product image is available`);
