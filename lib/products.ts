@@ -195,4 +195,61 @@ export const products: Product[] = [
     ],
     inquiry: 'What does your crew need to capture in the field?',
   },
+  {
+    slug: 'leveeguard',
+    name: 'LeveeGuard',
+    category: 'Flood fight operations',
+    summary: 'Record levee patrol observations offline and prepare a daily flood fight log from the district’s event records.',
+    headline: 'See what changed since the last levee patrol.',
+    introduction: 'LeveeGuard gives field crews and district coordinators a shared record of high water. Crews can photograph what they see on patrol, even without cell service. After sync, the district can review reports by levee station and see which response measures are still in place.',
+    image: {
+      src: '/products/leveeguard.webp',
+      alt: 'An orange flood barrier and sandbags follow a brick walkway beside the high Mississippi River in Baton Rouge.',
+      caption: 'Temporary barriers along the Baton Rouge levee during the Mississippi River flood of May 2011.',
+      credits: [{ label: 'U.S. Geological Survey', href: 'https://www.usgs.gov/media/images/tiger-dams-reinforce-baton-rouge-levees' }],
+    },
+    screenshotIntro: 'The prototype displays the name Flood Fight. These screens use demonstration records to show how a district documents its work.',
+    screenshots: [
+      {
+        title: 'See what needs attention',
+        src: '/products/leveeguard-overview.webp', width: 1580, height: 960,
+        alt: 'Flood Fight coordinator dashboard for a demonstration district, with event counts, maintenance totals and recent activity.',
+        caption: 'The district overview shows three open observations, one response measure in place and an overdue maintenance item. Each count opens the records behind it.',
+      },
+      {
+        title: 'Record an inspection finding',
+        src: '/products/leveeguard-inspection.webp', width: 1360, height: 960,
+        alt: 'Field inspection checklist showing four rated items and an expanded finding marked minimally acceptable.',
+        caption: 'The crew has rated four of 39 items on a routine district inspection. For a finding rated minimally acceptable, the crew can record the station, notes and recommended follow-up.',
+      },
+      {
+        title: 'Compare field reports with river stage',
+        src: '/products/leveeguard-event-summary.webp', width: 1360, height: 960,
+        alt: 'Printable exercise summary with a Missouri River stage chart and two fictional observations listed by levee station.',
+        caption: 'This exercise pairs fictional field reports with June 2019 gauge readings at Hermann, Missouri. The chart marks event activation, the river crest and when the exercise threat passed.',
+        credits: [
+          { label: 'USGS Hermann gauge', href: 'https://waterdata.usgs.gov/monitoring-location/USGS-06934500/' },
+          { label: 'National Weather Service flood stages', href: 'https://water.noaa.gov/gauges/HRNM7' },
+        ],
+      },
+    ],
+    example: {
+      title: 'Hand off the evening patrol',
+      description: 'Two crews can report the same spot hours apart. The next shift needs both accounts, the location along the levee and a record of what the district did that day.',
+      steps: [
+        { title: 'Record what the crew saw', description: 'Open the event on the field device. With a GPS fix, select the observation type and severity, add a note or photo, and save. The device keeps the record until it can sync.' },
+        { title: 'Compare reports at the station', description: 'After sync, the coordinator checks the location, time and severity. If an earlier patrol reported the same feature, link the two observations so the next crew can follow both accounts.' },
+        { title: 'Prepare the shift handoff', description: 'Choose the event and date for the daily log. Review the observations, measures placed or removed and material deliveries, then print the log or export its CSV for the incoming shift.' },
+      ],
+    },
+    features: [
+      { title: 'Read the river gauge', description: 'View recent readings on a hydrograph alongside flood stages and the available forecast crest. The observation time tells the coordinator how current the reading is.' },
+      { title: 'Track temporary measures', description: 'Keep a record of measures placed during an event and follow their removal status. The next shift can distinguish work still in place from work already removed.' },
+      { title: 'Account for material deliveries', description: 'Record the supplier, ticket number, material and delivered quantity. Keep the ticket photo and its materials cost entry with the event for later review.' },
+      { title: 'Turn findings into follow-up work', description: 'Walk a levee segment with the district inspection checklist. Attach notes and photos to individual findings so a coordinator can review them, record deficiencies and sign off on the inspection.' },
+      { title: 'Keep an asset’s maintenance history', description: 'Find a gate, culvert or pump station by levee segment and station. Open its record to review work orders, outstanding deficiencies and past maintenance.' },
+      { title: 'Share an event summary', description: 'Coordinators can issue a read-only guest link to an event summary. District staff can also export mapped observations and measures as GeoJSON or KML.' },
+    ],
+    inquiry: 'What does your district need for the next patrol handoff?',
+  },
 ];

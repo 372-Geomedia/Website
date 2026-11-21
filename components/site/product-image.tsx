@@ -19,7 +19,7 @@ export function ProductImage({ product, thumbnail = false }: { product: Product;
           src={image.src}
           alt={image.alt}
           fill
-          sizes={thumbnail ? '(max-width: 760px) 90vw, 30vw' : '(max-width: 900px) 90vw, 52vw'}
+          sizes={thumbnail ? '(max-width: 760px) 90vw, (max-width: 1150px) 45vw, 23vw' : '(max-width: 900px) 90vw, 52vw'}
         />
       </div>
       {(!thumbnail || image.credits) && (

@@ -1,6 +1,6 @@
 # 372 GeoMedia
 
-The public site has a homepage, four navigation pages (Capabilities, Work, About, and Talk with us), and three Work detail pages. An unlisted Products menu at `/products` links to three product drafts. The supplied `../logo.png` is preserved and copied into `public/logo.png`.
+The public site has a homepage, four navigation pages (Capabilities, Work, About, and Talk with us), and three Work detail pages. An unlisted Products menu at `/products` links to four product drafts. The supplied `../logo.png` is preserved and copied into `public/logo.png`.
 
 Insights and the separate Contact page were removed. Contact became Talk with us at `/talk`; nginx redirects `/contact` there.
 
@@ -73,12 +73,12 @@ All company navigation stays within the local site. The hero's What we do link s
 | `/work/[slug]` | Challenge, sources, approach, operational outputs, and feedback for each workflow |
 | `/about` | Company perspective, the 372 name story, working principles, and combined experience |
 | `/talk` | Talk with us: published company email, a prefilled email-draft link, and three starting prompts |
-| `/products` | Unlisted menu for the three product drafts |
-| `/products/372-strata`, `/products/gismaster`, `/products/geofara` | Product screenshots with full-size views, a worked example, capabilities and an inquiry link |
+| `/products` | Unlisted menu for the four product drafts |
+| `/products/372-strata`, `/products/gismaster`, `/products/geofara`, `/products/leveeguard` | Product screenshots with full-size views, a worked example, capabilities and an inquiry link |
 
-Share the Products menu or an individual product URL directly. All four pages set `noindex` and are accessible to anyone with the link.
+Share the Products menu or an individual product URL directly. The menu and each product page set `noindex` and are accessible to anyone with the link.
 
-`lib/products.ts` holds the product copy, screenshot captions and source credits. Strata’s screenshots use public Texas datasets and the bundled Stratton survey. The GISMaster prototype screens use fictional parcel records and demonstration Collector data. Geofara’s screenshots come from the Android editor’s sample projects. The WebP files are in `public/products/`.
+`lib/products.ts` holds the product copy, screenshot captions and source credits. Strata’s screenshots use public Texas datasets and the bundled Stratton survey. The GISMaster prototype screens use fictional parcel records and demonstration Collector data. Geofara’s screenshots come from the Android editor’s sample projects. LeveeGuard’s screenshots show the Flood Fight prototype with demonstration records. The WebP files are in `public/products/`.
 
 `lib/work.ts` holds the detail records. Dynamic pages use async parameters, `generateStaticParams`, `dynamicParams = false`, and `notFound()` for unknown slugs. `app/not-found.tsx` provides a recovery page. Each route has its own title and description; no publication dates or authors are fabricated.
 
@@ -108,6 +108,6 @@ Assets needed for those increments: approved case-study details and results; pro
 
 Semantic landmarks, a skip link, one H1 per page, visible focus, contrast-conscious text, reduced motion, and a focus-managed mobile menu. The menu closes on ordinary link activation and resets on route changes, including Back/Forward. Content and navigation are readable without animation. Grids stack at narrower breakpoints; diagrams use readable single-column states on small screens. No carousel, auto-playing media, or data-entry form is included.
 
-Build, TypeScript, and lint checks validate authored code. `npm run check:routes` checks the eight public pages, four unlisted product pages, and four missing-page responses (including the removed `/insights`). It verifies status, unique metadata, shared landmarks, active navigation, fragments, local links, and the email draft. It also checks product menu and breadcrumb links, indexing directives, product images, and the absence of product links on public pages. The `/contact` redirect lives in nginx, so check it against the production container. The script accepts only local origins.
+Build, TypeScript, and lint checks validate authored code. `npm run check:routes` checks the eight public pages, the unlisted Products menu and its four drafts, and four missing-page responses (including the removed `/insights`). It verifies status, unique metadata, shared landmarks, active navigation, fragments, local links, and the email draft. It also checks product menu and breadcrumb links, indexing directives, product images, and the absence of product links on public pages. The `/contact` redirect lives in nginx, so check it against the production container. The script accepts only local origins.
 
 The unmodified generated UI catalog and its unused mobile hook are excluded from lint because the starter ships with lint errors in those files; they remain covered by TypeScript. Browser interaction and device visual QA remain outstanding. The previously shared preview at https://geomedia-372.jasonjordan00.chatgpt.site remains on its earlier published version and is accessible to anyone with the link.

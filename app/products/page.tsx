@@ -4,7 +4,7 @@ import { ProductImage } from '@/components/site/product-image';
 import { pageMetadata } from '@/lib/page-metadata';
 import { products } from '@/lib/products';
 
-export const metadata = pageMetadata('Products', 'Explore 372 Strata for Texas subsurface geology, GISMaster for county parcel records and Geofara for field mapping.');
+export const metadata = pageMetadata('Products', 'Explore 372 Strata for Texas subsurface geology, GISMaster for county parcel records, Geofara for field mapping and LeveeGuard for flood fight operations.');
 
 export default function ProductsPage() {
   return (
@@ -12,7 +12,7 @@ export default function ProductsPage() {
       <PageIntro
         label="Products"
         title="Products"
-        description="Explore the geology around a well, trace a parcel through an ownership change, or take a map into the field."
+        description="Explore the geology around a well, trace a parcel through an ownership change, map assets in the field or coordinate a levee patrol."
       />
       <nav className="shell product-menu" aria-label="Products">
         {products.map(product => (
