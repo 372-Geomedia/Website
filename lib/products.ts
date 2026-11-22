@@ -7,6 +7,14 @@ type ProductImage = {
 };
 type Feature = { title: string; description: string };
 
+export type ProductIconName =
+  | 'layers' | 'file-search' | 'wifi-off' | 'crosshair' | 'waves' | 'fuel'
+  | 'search' | 'history' | 'landmark' | 'scale' | 'shield-check' | 'file-spreadsheet'
+  | 'clipboard-list' | 'link' | 'pentagon' | 'database' | 'printer'
+  | 'activity' | 'construction' | 'truck' | 'clipboard-check' | 'wrench' | 'share';
+
+export type ProductMotifName = 'strata' | 'parcels' | 'field' | 'levee';
+
 export type Product = {
   slug: string;
   name: string;
@@ -14,11 +22,26 @@ export type Product = {
   summary: string;
   headline: string;
   introduction: string;
+  /** Bright tone for dark backgrounds, and a deeper ink tone for light ones. */
+  accent: string;
+  accentInk: string;
+  motif: ProductMotifName;
+  /** Chrome drawn around the screenshots. */
+  frame: 'window' | 'tablet';
+  frameLabel: string;
+  /** Short status and platform chips under the hero introduction. */
+  badges: string[];
+  /** Two small facts that float beside the hero image. */
+  callouts: { label: string; value: string }[];
+  /** Verifiable counts for the strip below the hero. */
+  highlights: { value: string; label: string }[];
+  /** A one-sentence problem, then the product's answer to it. */
+  pitch: { lead: string; answer: string };
   image: ProductImage;
   screenshotIntro: string;
   screenshots: (ProductImage & { title: string; width: number; height: number })[];
   example: Feature & { steps: Feature[] };
-  features: Feature[];
+  features: (Feature & { icon: ProductIconName })[];
   inquiry: string;
 };
 
@@ -37,6 +60,26 @@ export const products: Product[] = [
     summary: 'Explore Texas geology, groundwater and oil and gas records in a Windows desktop atlas.',
     headline: 'Read the geology behind a Texas well.',
     introduction: 'Bring public well records and your own subsurface data into one Windows workspace. Start with a Texas county, select a well on the map and see how its geology compares with the wells around it.',
+    accent: '#7ea3f2',
+    accentInk: '#2c4ca6',
+    motif: 'strata',
+    frame: 'window',
+    frameLabel: '372 Strata',
+    badges: ['Windows desktop', 'Offline once downloaded', 'Texas counties'],
+    callouts: [
+      { label: 'Open your own files', value: 'LAS · SEG-Y · GeoPackage' },
+      { label: 'Stacked in one view', value: 'Wells · aquifers · soils · faults' },
+    ],
+    highlights: [
+      { value: '7', label: 'map products, from aquifers to oil and gas wells' },
+      { value: '7', label: 'industry file workflows, from LAS logs to SEG-Y seismic' },
+      { value: '21', label: 'wells and 10 tracked sand tops in the bundled Stratton survey' },
+      { value: '0', label: 'map accounts or access tokens required' },
+    ],
+    pitch: {
+      lead: 'A well’s filing, its water-well neighbors, the rock at the surface and the seismic beneath it rarely share a screen.',
+      answer: ' 372 Strata puts them in one window, one county at a time.',
+    },
     image: {
       src: '/products/372-strata.webp',
       alt: 'Red and blue seismic reflections along two sides of a Stratton survey block meet a horizontal slice at 4,000 feet below sea level.',
@@ -80,12 +123,12 @@ export const products: Product[] = [
       ],
     },
     features: [
-      { title: 'Put a well in context', description: 'Overlay aquifer footprints, water wells, soils and surface geology with oil and gas well locations from the Railroad Commission of Texas.' },
-      { title: 'Inspect your own files', description: 'Read a curve by depth in a LAS well log, examine a directional survey or step through a section from a SEG-Y seismic file.' },
-      { title: 'Reopen a county offline', description: 'Download the county and the layers you need before leaving the office. Saved records remain available for local review.' },
-      { title: 'Screen a proposed site', description: 'Drop a pin, set a radius and list nearby water wells, drillers’ reports and oil and gas well locations. Export the records as CSV or a printable map and source inventory as HTML.' },
-      { title: 'Compare groundwater observations', description: 'Set the ends and width of a groundwater section. Compare dated water levels and screened intervals across the wells in that corridor.' },
-      { title: 'Read production by reporting unit', description: 'Review oil by lease and gas by gas-well ID. When several wells share a reporting unit, its production is counted once.' },
+      { icon: 'layers', title: 'Put a well in context', description: 'Overlay aquifer footprints, water wells, soils and surface geology with oil and gas well locations from the Railroad Commission of Texas.' },
+      { icon: 'file-search', title: 'Inspect your own files', description: 'Read a curve by depth in a LAS well log, examine a directional survey or step through a section from a SEG-Y seismic file.' },
+      { icon: 'wifi-off', title: 'Reopen a county offline', description: 'Download the county and the layers you need before leaving the office. Saved records remain available for local review.' },
+      { icon: 'crosshair', title: 'Screen a proposed site', description: 'Drop a pin, set a radius and list nearby water wells, drillers’ reports and oil and gas well locations. Export the records as CSV or a printable map and source inventory as HTML.' },
+      { icon: 'waves', title: 'Compare groundwater observations', description: 'Set the ends and width of a groundwater section. Compare dated water levels and screened intervals across the wells in that corridor.' },
+      { icon: 'fuel', title: 'Read production by reporting unit', description: 'Review oil by lease and gas by gas-well ID. When several wells share a reporting unit, its production is counted once.' },
     ],
     inquiry: 'Which Texas county are you studying?',
   },
@@ -96,6 +139,25 @@ export const products: Product[] = [
     summary: 'Follow ownership, recorded documents and parcel history in a working prototype for county mapping staff.',
     headline: 'Keep a parcel’s history through every split.',
     introduction: 'A parcel can change shape, owner and identifier over its lifetime. GISMaster is a working prototype that helps county mapping staff trace those changes back to the recorded documents.',
+    accent: '#6fcfa8',
+    accentInk: '#1f6b4f',
+    motif: 'parcels',
+    frame: 'window',
+    frameLabel: 'GISMaster · working prototype',
+    badges: ['Working prototype', 'Windows sign-in', 'ASP.NET Core · SQL Server'],
+    callouts: [
+      { label: 'Before every split', value: 'A tax-history check' },
+      { label: 'After every split', value: 'Parent and successors linked' },
+    ],
+    highlights: [
+      { value: '3', label: 'parcel operations (divide, combine, retire), each gated by a tax-history check' },
+      { value: '16', label: 'taxing-district types assigned together with one master tax code' },
+      { value: '4', label: 'county offices in the loop: Assessor, Collector, Recorder and Clerk' },
+    ],
+    pitch: {
+      lead: 'Every split, combine and retirement rewrites a parcel’s story, and the paper trail rarely keeps up.',
+      answer: ' GISMaster keeps every chapter, linked to the recorded documents behind it.',
+    },
     image: {
       src: '/products/gismaster.svg',
       alt: 'An illustrated parcel division showing two successor lots inside the original boundary.',
@@ -132,12 +194,12 @@ export const products: Product[] = [
       ],
     },
     features: [
-      { title: 'Find a parcel from an old deed', description: 'Search by parcel ID, owner, street, subdivision or document number. Include prior ownership to find a tract when the name on the deed has since changed.' },
-      { title: 'Trace a corrected record', description: 'The Changes tab keeps before-and-after field values, the source of the change and comments. The History tab keeps the recorded instruments behind the parcel.' },
-      { title: 'Assign taxing districts', description: 'Import the county’s district definitions, then apply a master tax code to a parcel to assign its school, fire and other jurisdictions together.' },
-      { title: 'Compare valuation years', description: 'Select a saved tax year to review land, improvement and assessed values. The prototype demonstrates this exchange with a stand-in Assessor system.' },
-      { title: 'Protect owner details', description: 'Access to protected records requires a separate grant. When parcels are combined, active protections on a source carry forward to the surviving record.' },
-      { title: 'Hand off a filtered search', description: 'Staff with export permission can download matching parcels, document histories or taxing districts as CSV. They can also prepare a parcel tracking report or subdivision routing slip for PDF output.' },
+      { icon: 'search', title: 'Find a parcel from an old deed', description: 'Search by parcel ID, owner, street, subdivision or document number. Include prior ownership to find a tract when the name on the deed has since changed.' },
+      { icon: 'history', title: 'Trace a corrected record', description: 'The Changes tab keeps before-and-after field values, the source of the change and comments. The History tab keeps the recorded instruments behind the parcel.' },
+      { icon: 'landmark', title: 'Assign taxing districts', description: 'Import the county’s district definitions, then apply a master tax code to a parcel to assign its school, fire and other jurisdictions together.' },
+      { icon: 'scale', title: 'Compare valuation years', description: 'Select a saved tax year to review land, improvement and assessed values. The prototype demonstrates this exchange with a stand-in Assessor system.' },
+      { icon: 'shield-check', title: 'Protect owner details', description: 'Access to protected records requires a separate grant. When parcels are combined, active protections on a source carry forward to the surviving record.' },
+      { icon: 'file-spreadsheet', title: 'Hand off a filtered search', description: 'Staff with export permission can download matching parcels, document histories or taxing districts as CSV. They can also prepare a parcel tracking report or subdivision routing slip for PDF output.' },
     ],
     inquiry: 'How does your county track parcel changes?',
   },
@@ -148,6 +210,25 @@ export const products: Product[] = [
     summary: 'Map assets, edit boundaries and record inspections in the field on an Android tablet.',
     headline: 'Bring the map to the inspection.',
     introduction: 'Geofara puts GIS editing tools in the hands of field crews. Draw a feature, record what you see and attach a photo while you’re still on site. The Android tablet workspace keeps the map, layers and inspection form within reach.',
+    accent: '#c6e266',
+    accentInk: '#566b0c',
+    motif: 'field',
+    frame: 'tablet',
+    frameLabel: 'Geofara',
+    badges: ['Android tablet', 'Offline-ready', 'PostGIS sync'],
+    callouts: [
+      { label: 'Capture on site', value: 'GPS · photo · barcode' },
+      { label: 'Hand back', value: 'GeoPackage with photos' },
+    ],
+    highlights: [
+      { value: '8', label: 'typed field kinds, from choice lists to JSON' },
+      { value: '1', label: 'tap to save a feature and start the next one' },
+      { value: '3', label: 'north references for bearings: true, UTM grid or magnetic' },
+    ],
+    pitch: {
+      lead: 'The inspection happens in the field. The record shouldn’t have to wait for the office.',
+      answer: ' Geofara puts the map, the form and the camera in one tablet workspace.',
+    },
     image: {
       src: '/products/geofara.webp',
       alt: 'Geofara’s layer panel beside a street map with two labeled valves, a dashed trail and a parcel boundary.',
@@ -186,12 +267,12 @@ export const products: Product[] = [
       ],
     },
     features: [
-      { title: 'Capture the location', description: 'Use the tablet’s GPS or a paired GNSS receiver to collect a point or track. Snap a new boundary to an existing vertex or trace a shared edge.' },
-      { title: 'Build a form for the job', description: 'Define required fields and choices, scan an asset barcode or show a follow-up question when an inspection response calls for one.' },
-      { title: 'Keep repeat inspections together', description: 'Link each visit to its parent asset. Open the asset to see its related records, then add a new inspection with its own date, observations and attachments.' },
-      { title: 'Edit shared boundaries', description: 'Move a common corner or insert a vertex on a shared edge. Preview the neighboring polygons involved and apply the edits together.' },
-      { title: 'Sync field edits to PostGIS', description: 'Edit a supported PostGIS layer directly, or take an editable copy offline. On reconnect, compare conflicting tablet and database edits before syncing.' },
-      { title: 'Print a map for the crew', description: 'Set the paper size and map extent, place a legend and scale bar, and add field notes. Export the saved layout to PDF.' },
+      { icon: 'crosshair', title: 'Capture the location', description: 'Use the tablet’s GPS or a paired GNSS receiver to collect a point or track. Snap a new boundary to an existing vertex or trace a shared edge.' },
+      { icon: 'clipboard-list', title: 'Build a form for the job', description: 'Define required fields and choices, scan an asset barcode or show a follow-up question when an inspection response calls for one.' },
+      { icon: 'link', title: 'Keep repeat inspections together', description: 'Link each visit to its parent asset. Open the asset to see its related records, then add a new inspection with its own date, observations and attachments.' },
+      { icon: 'pentagon', title: 'Edit shared boundaries', description: 'Move a common corner or insert a vertex on a shared edge. Preview the neighboring polygons involved and apply the edits together.' },
+      { icon: 'database', title: 'Sync field edits to PostGIS', description: 'Edit a supported PostGIS layer directly, or take an editable copy offline. On reconnect, compare conflicting tablet and database edits before syncing.' },
+      { icon: 'printer', title: 'Print a map for the crew', description: 'Set the paper size and map extent, place a legend and scale bar, and add field notes. Export the saved layout to PDF.' },
     ],
     inquiry: 'What does your crew need to capture in the field?',
   },
@@ -202,6 +283,25 @@ export const products: Product[] = [
     summary: 'Record levee patrol observations offline and prepare a daily flood fight log from the district’s event records.',
     headline: 'See what changed since the last levee patrol.',
     introduction: 'LeveeGuard gives field crews and district coordinators a shared record of high water. Crews can photograph what they see on patrol, even without cell service. After sync, the district can review reports by levee station and see which response measures are still in place.',
+    accent: '#f4a259',
+    accentInk: '#9a4a07',
+    motif: 'levee',
+    frame: 'window',
+    frameLabel: 'Flood Fight · prototype',
+    badges: ['Prototype', 'Offline-first', 'Field crews + coordinators'],
+    callouts: [
+      { label: 'No signal needed', value: 'Saved on the device until sync' },
+      { label: 'River stage', value: 'USGS gauge · NWS forecast' },
+    ],
+    highlights: [
+      { value: '39', label: 'items on the demonstration district’s routine inspection checklist' },
+      { value: '3', label: 'public data sources: USGS gauges, NWS forecasts and the National Levee Database' },
+      { value: '2', label: 'map export formats for observations and measures: GeoJSON and KML' },
+    ],
+    pitch: {
+      lead: 'On a levee, the next shift needs to know what the last one saw.',
+      answer: ' LeveeGuard keeps every observation, measure and delivery in one shared record, even when the signal drops.',
+    },
     image: {
       src: '/products/leveeguard.webp',
       alt: 'An orange flood barrier and sandbags follow a brick walkway beside the high Mississippi River in Baton Rouge.',
@@ -243,12 +343,12 @@ export const products: Product[] = [
       ],
     },
     features: [
-      { title: 'Read the river gauge', description: 'View recent readings on a hydrograph alongside flood stages and the available forecast crest. The observation time tells the coordinator how current the reading is.' },
-      { title: 'Track temporary measures', description: 'Keep a record of measures placed during an event and follow their removal status. The next shift can distinguish work still in place from work already removed.' },
-      { title: 'Account for material deliveries', description: 'Record the supplier, ticket number, material and delivered quantity. Keep the ticket photo and its materials cost entry with the event for later review.' },
-      { title: 'Turn findings into follow-up work', description: 'Walk a levee segment with the district inspection checklist. Attach notes and photos to individual findings so a coordinator can review them, record deficiencies and sign off on the inspection.' },
-      { title: 'Keep an asset’s maintenance history', description: 'Find a gate, culvert or pump station by levee segment and station. Open its record to review work orders, outstanding deficiencies and past maintenance.' },
-      { title: 'Share an event summary', description: 'Coordinators can issue a read-only guest link to an event summary. District staff can also export mapped observations and measures as GeoJSON or KML.' },
+      { icon: 'activity', title: 'Read the river gauge', description: 'View recent readings on a hydrograph alongside flood stages and the available forecast crest. The observation time tells the coordinator how current the reading is.' },
+      { icon: 'construction', title: 'Track temporary measures', description: 'Keep a record of measures placed during an event and follow their removal status. The next shift can distinguish work still in place from work already removed.' },
+      { icon: 'truck', title: 'Account for material deliveries', description: 'Record the supplier, ticket number, material and delivered quantity. Keep the ticket photo and its materials cost entry with the event for later review.' },
+      { icon: 'clipboard-check', title: 'Turn findings into follow-up work', description: 'Walk a levee segment with the district inspection checklist. Attach notes and photos to individual findings so a coordinator can review them, record deficiencies and sign off on the inspection.' },
+      { icon: 'wrench', title: 'Keep an asset’s maintenance history', description: 'Find a gate, culvert or pump station by levee segment and station. Open its record to review work orders, outstanding deficiencies and past maintenance.' },
+      { icon: 'share', title: 'Share an event summary', description: 'Coordinators can issue a read-only guest link to an event summary. District staff can also export mapped observations and measures as GeoJSON or KML.' },
     ],
     inquiry: 'What does your district need for the next patrol handoff?',
   },
