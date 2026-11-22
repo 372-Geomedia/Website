@@ -69,7 +69,7 @@ All company navigation stays within the local site. The hero's What we do link s
 | --- | --- |
 | `/` | Geographic hero, philosophy, capabilities, and team experience |
 | `/capabilities` | Six service groups and a connected-information diagram with a feedback loop |
-| `/work` | Three clearly labeled illustrative workflows |
+| `/work` | A filterable gallery of ten project screenshots by sector (CSS-only filter, no client JS), then three clearly labeled illustrative workflows |
 | `/work/[slug]` | Challenge, sources, approach, operational outputs, and feedback for each workflow |
 | `/about` | Company perspective, the 372 name story, working principles, and combined experience |
 | `/talk` | Talk with us: published company email, a prefilled email-draft link, and three starting prompts |
