@@ -54,7 +54,7 @@ function Strata() {
   );
 }
 
-/* GISMaster: a lattice of parcels, one of them divided by a dashed new boundary. */
+/* Parcelwise: a lattice of parcels, one of them divided by a dashed new boundary. */
 function Parcels() {
   const random = seeded(372);
   const cols = 12;

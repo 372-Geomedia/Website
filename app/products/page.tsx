@@ -4,7 +4,7 @@ import { ProductImage } from '@/components/site/product-image';
 import { pageMetadata } from '@/lib/page-metadata';
 import { products } from '@/lib/products';
 
-export const metadata = pageMetadata('Products', 'Explore 372 Strata for Texas subsurface geology, GISMaster for county parcel records, Geofara for field mapping and LeveeGuard for flood fight operations.');
+export const metadata = pageMetadata('Products', 'Explore 372 Strata for Texas subsurface geology, Parcelwise for appraisal district parcel records, Geofara for field mapping and LeveeGuard for flood fight operations.');
 
 export default function ProductsPage() {
   return (

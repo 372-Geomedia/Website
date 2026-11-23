@@ -5,5 +5,8 @@
   "outputDirectory": "dist/client",
   "cleanUrls": true,
   "trailingSlash": false,
-  "redirects": [{ "source": "/contact", "destination": "/talk", "permanent": true }]
+  "redirects": [
+    { "source": "/contact", "destination": "/talk", "permanent": true },
+    { "source": "/products/gismaster", "destination": "/products/parcelwise", "permanent": true }
+  ]
 }

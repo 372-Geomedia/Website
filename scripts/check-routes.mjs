@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 // development or production server: npm run check:routes -- http://localhost:3001
 const base = new URL(process.argv[2] || 'http://localhost:3000');
 assert(['localhost', '127.0.0.1', '[::1]'].includes(base.hostname), 'Use a local server for these checks.');
-const productPaths = ['/products/372-strata', '/products/gismaster', '/products/geofara', '/products/leveeguard'];
+const productPaths = ['/products/372-strata', '/products/parcelwise', '/products/geofara', '/products/leveeguard'];
 const isProductPath = path => path === '/products' || path.startsWith('/products/');
 const queue = ['/', '/capabilities', '/work', '/about', '/talk', '/products'];
 const pages = new Map();
